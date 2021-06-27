@@ -1,1 +1,10 @@
 2021-06-24 03:20:25,345 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2021-06-27 04:56:25,903 [Worker-853: Creating maven-archetype-webapp] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Collecting project info '/pom.xml' C:\Users\saura\Desktop\Phase 3 Workspace\Eclipse Workspace\SpringFrameworkPractise\pom.xml
+2021-06-27 04:56:29,405 [Worker-853: Creating maven-archetype-webapp] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: com.SpringFramePractise:SpringFrameworkPractise:0.0.1-SNAPSHOT @ C:\Users\saura\Desktop\Phase 3 Workspace\Eclipse Workspace\SpringFrameworkPractise\pom.xml.
+2021-06-27 04:56:32,238 [Worker-853: Creating maven-archetype-webapp] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /SpringFrameworkPractise/src/main/java
+2021-06-27 04:56:32,239 [Worker-853: Creating maven-archetype-webapp] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /SpringFrameworkPractise/src/test/java
+2021-06-27 04:56:38,188 [Worker-853: Creating maven-archetype-webapp] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 12 sec
+2021-06-27 04:56:39,026 [Worker-857: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-06-27 04:56:39,027 [Worker-857: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\saura\Desktop\Phase 3 Workspace\Eclipse Workspace\SpringFrameworkPractise\src\main\resources
+2021-06-27 04:56:39,030 [Worker-857: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-06-27 04:56:39,030 [Worker-857: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\saura\Desktop\Phase 3 Workspace\Eclipse Workspace\SpringFrameworkPractise\src\test\resources
