@@ -15,14 +15,14 @@ class Active {
 		var3=50;
 	}
 	
-	public Active getsingletoninstance()
+	public static Active getsingletoninstance()
 	{
-		if(this.obj==null)
+		if(obj==null)
 		{
-			this.obj=new Active();
-			return this.obj;
+			obj=new Active();
+			return obj;
 		}
 		else
-			return this.obj;
+			return obj;
 	}
 }
