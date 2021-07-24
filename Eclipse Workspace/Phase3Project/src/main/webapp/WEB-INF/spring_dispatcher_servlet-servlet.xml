@@ -2,20 +2,105 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc = "http://www.springframework.org/schema/mvc"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context.xsd">    
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">    
     
+    <!-- Enabling Scan for Component Annotation -->
     <context:component-scan base-package="sportyshoes"></context:component-scan>
     
+    <!-- Enabling Write mode for Hibernate Transaction (Basically enabling @Transactional annotation on methods) & (Since we are Implementing CRUD to DAO so we need to enable weaving 
+    to class not CGLIB Proxy at runtime IMPORTANT) -->
+    <tx:annotation-driven proxy-target-class="true"/>
+    
+    
+    
+    <!-- View Resolver Bean -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" name="viewResolver">
-    
-    <property name="prefix" value="/WEB-INF/views/"></property>
-    <property name="suffix" value=".jsp"></property>
-    
+		    <property name="prefix" value="/WEB-INF/views/"></property>
+		    <property name="suffix" value=".jsp"></property>
     </bean>
     
     
+    
+    <!-- Defining Resource Folder for Images and other resources -->
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:resources location="/Resources/" mapping="/Resources/**"></mvc:resources>
+    
+    
+    <!-- Defining the CommonsMultipartResolver -->
+    <bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+    									
+    							
+    							
+    							<!-- Hibernate Template Configuration -->
+    																
+    													<!-- Spring JDBC DriverManagerDataSource Bean name= datasource -->
+																    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" name="datasource">
+																    		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+																    		<property name="url" value="jdbc:mysql://localhost:3306/sportyshoes"></property>
+																    		<property name="username" value="root"></property>
+																    		<property name="password" value="dattago1"></property>
+																    </bean>
+														<!-- END OF Spring JDBC DriverManager -->
+																    
+														<!-- Spring ORM LocalSessionFactoryBean Bean name= losfactory -->
+																    <bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" name="losfactory">
+																    		<property name="dataSource" ref="datasource"></property>
+																    		<property name="HibernateProperties">
+																    				<props>
+																    						<prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
+																    						<prop key="hibernate.show_sql">true</prop>
+																    						<prop key="hibernate.hbm2ddl.auto">update</prop>
+																    				</props>
+																    		</property>
+																    		<property name="annotatedClasses">
+																    			<list>
+																    					<value>sportyshoes.MODELS.User</value>
+																    					<value>sportyshoes.MODELS.Product</value>
+																    					<value>sportyshoes.MODELS.Purchase_Entry</value>
+																    			</list>
+																    		</property>
+																    </bean>
+														<!-- END OF Spring ORM LocalSessionFactoryBean-->
+																    
+														<!--  Spring ORM HibernateTemplate Bean name= hibernateTemplate -->
+																    <bean class="org.springframework.orm.hibernate5.HibernateTemplate" name="hibernateTemplate">
+																    	<property name="sessionFactory" ref="losfactory"></property>
+																    </bean>
+										    			<!--  END OF Spring ORM HibernateTemplate -->
+										    			
+										    			<!-- Configuring Transaction Manager to make write mode Enabled -->
+													    			<bean class="org.springframework.orm.hibernate5.HibernateTransactionManager" name="transactionManager">
+													    				<property name="sessionFactory" ref="losfactory"></property>
+													    			</bean>
+													    <!-- END OF Transaction Configuration -->			
+										    			
+							<!-- END OF HibernateTemplate Configuration  -->   
+    
     </beans>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
