@@ -38,7 +38,7 @@ public class demoController{
 		Book b1 = new Book("Hansel and Gretel", "Author1", "1234");
 		Book b2 = new Book("Prince and the Pauper", "Author2", "4567");
 		Book b3 = new Book("Heide", "Author3", "67893");
-		Book b4 = new Book("The Invisible Man", "Author4", "198");
+		Book b4 = new Book("The Invisible Man", "Author4", "120");
 		booklist.add(b1);
 		booklist.add(b2);
 		booklist.add(b3);
