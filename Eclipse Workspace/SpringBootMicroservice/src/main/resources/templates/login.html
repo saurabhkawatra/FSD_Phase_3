@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Login Page</h1>
+<form th:action="@{/validate}" method="post">
+<h3>Enter Username<input type="text" id="uname"name="username"></h3>
+<h3>Enter Password<input type="password" id="pass" name="password"></h3>
+
+<button type="submit">Login</button>
+</form>
+</body>
+</html>

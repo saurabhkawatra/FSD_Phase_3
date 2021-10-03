@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Register Page</h1>
+<form th:action="@{/registernewuser}" method="post">
+<h3>Enter your email <input type="text" name="email" id="email" onkeyup="emailcheck()"> <span id="emailfield"></span></h3>
+<h3>Enter preferred Username <input type="text" id="username" name="username" onkeyup="usernamecheck()"><span id="unamefield"></span></h3>
+<h3>Enter password for your Account <input type="password" name="password" id="password" onkeyup="checkpass()"><span id="pfield"></span></h3>
+<button id="btn" type="submit" disabled>Register</button>
+</form>
+
+<script type="text/javascript">
+ucheck=0;
+echeck=0;
+pcheck=0;
+function emailcheck() {
+	let request=new XMLHttpRequest();
+    let url='http://localhost:8086/checkemail/'+ document.getElementById('email').value;
+	request.open('GET',url,false);
+	request.send();
+	let result = request.responseText;
+	let email=document.getElementById('email').value;
+	let value=email.match("[a-z|A-Z|0-9]+@[a-z|A-Z|0-9]+\.(com|(co\.[a-z|A-Z][a-z|A-Z]))");
+    console.log(value);
+	if(result=='blank') {
+		document.getElementById('email').style="border: 5px solid red";
+		document.getElementById('emailfield').innerHTML='&#10060; Email is Required!';
+		echeck=0;
+		buttoncheck();
+	}else if(result=='invalid email') {
+		document.getElementById('email').style="border: 5px solid red";
+		document.getElementById('emailfield').innerHTML= '&#10060; Invalid Email!';
+		echeck=0;
+		buttoncheck();
+	}else if(result=='available') {
+		document.getElementById('email').style="border: 5px solid green";
+		document.getElementById('emailfield').innerHTML= '&#9989;';
+		echeck=1;
+		buttoncheck();
+	}else {
+		document.getElementById('email').style="border: 5px solid red";
+		document.getElementById('emailfield').innerHTML= '&#10060; Email already Registered!';
+		echeck=0;
+		buttoncheck();
+	}
+}
+function usernamecheck() {
+	let request=new XMLHttpRequest();
+    let url='http://localhost:8086/checkusername/'+ document.getElementById('username').value;
+	request.open('GET',url,false);
+	request.send();
+	let result = request.responseText;
+	let username=document.getElementById('username').value;
+	if(result=='blank') {
+		document.getElementById('username').style="border: 5px solid red";
+		document.getElementById('unamefield').innerHTML='&#10060; Username is Required!';
+		ucheck=0;
+		buttoncheck();
+	}else if(result=='available') {
+		document.getElementById('username').style="border: 5px solid green";
+		document.getElementById('unamefield').innerHTML= '&#9989;';
+		ucheck=1;
+		buttoncheck();
+	}else {
+		document.getElementById('username').style="border: 5px solid red";
+		document.getElementById('unamefield').innerHTML= '&#10060; Username Not Available!';
+		ucheck=0;
+		buttoncheck();
+	}
+}
+function checkpass() {
+	let x=document.getElementById('password').value;
+	if(x=='') {
+		document.getElementById('password').style="border: 5px solid red";
+		document.getElementById('pfield').innerHTML='&#10060; Password is Required!';
+		pcheck=0;
+		buttoncheck();
+	}else {
+		document.getElementById('password').style="border: 5px solid green";
+		document.getElementById('pfield').innerHTML= '&#9989;';
+		pcheck=1;
+		buttoncheck();
+	}
+}
+function buttoncheck() {
+	if(pcheck==1 && ucheck==1 && echeck==1){
+		document.getElementById('btn').disabled=false;
+	}else {
+		document.getElementById('btn').disabled=true;
+	}
+}
+</script>
+
+</body>
+</html>

@@ -21,13 +21,13 @@ public class demoController{
 	@GetMapping("/greeting")
 	public String greet()
 	{
-		return "Hello world";
+		return "Hello world from GetMapping";
 	}
 	
 	@PostMapping("/greeting")
 	public String greet1()
 	{
-		return "Hello world";
+		return "Hello world from PostMapping";
 	}
 	
 	@GetMapping("/test")
@@ -54,7 +54,7 @@ public class demoController{
 	{
 		System.out.println("id="+id);
 		System.out.println("id2="+id2);
-		return "run ok ";
+		return "run ok "+"id= "+id+" id2= "+id2;
 	}
 	
 	

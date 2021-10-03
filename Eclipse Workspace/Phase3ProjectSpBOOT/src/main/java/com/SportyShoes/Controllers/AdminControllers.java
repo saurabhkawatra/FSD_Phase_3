@@ -397,9 +397,14 @@ public class AdminControllers {
 				User u1=userDao.findById(p.getPurchased_By_userid()).get();
 							//System.out.println("Testing u1=  "+u1);
 				purchaseuserlist.add(u1);
+				if(productDao.findById(p.getPurchased_productid()).isPresent()) {
 				Product p1=productDao.findById(p.getPurchased_productid()).get();
 							//System.out.println("Testing p1=  "+p1);
 				purchaseproductlist.add(p1);
+				} else {
+					Product p1 = new Product(000, "Product Removed", "Product Removed", "Item removed", "No Image Available", "-", 00);
+					purchaseproductlist.add(p1);
+				}
 			}
 		}
 		
@@ -426,6 +431,8 @@ public class AdminControllers {
 			System.out.println("search purchases by particular date... ");
 			String date=request.getParameter("purchasesearchdate");
 			System.out.println("Selected date for Search :: "+date);
+			date="%"+date+"%";
+			System.out.println("Date String :: "+date);
 			List<Purchase_Entry> purchasesearchresultlist=purchase_entryDAO.searchbydate(date);
 			System.out.println("Number of Results Found :: "+purchasesearchresultlist.size());
 							purchasesearchresultlist.forEach(pe -> System.out.println(pe));
@@ -459,8 +466,19 @@ public class AdminControllers {
 			{
 			User u1=userDao.findById(pe.getPurchased_By_userid()).get();
 			purchasesearchuserlist.add(u1);
-			Product p1=productDao.findById(pe.getPurchased_productid()).get();
-			purchasesearchproductlist.add(p1);
+			/*
+			 * Product p1=productDao.findById(pe.getPurchased_productid()).get();
+			 * purchasesearchproductlist.add(p1);
+			 */
+			
+			if(productDao.findById(pe.getPurchased_productid()).isPresent()) {
+				Product p1=productDao.findById(pe.getPurchased_productid()).get();
+							//System.out.println("Testing p1=  "+p1);
+				purchasesearchproductlist.add(p1);
+				} else {
+					Product p1 = new Product(000, "Product Removed", "Product Removed", "Item removed", "No Image Available", "-", 00);
+					purchasesearchproductlist.add(p1);
+				}
 			}
 						purchasesearchuserlist.forEach(u -> System.out.println(u));
 						purchasesearchproductlist.forEach(p -> System.out.println(p));
